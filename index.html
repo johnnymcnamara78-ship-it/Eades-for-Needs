@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Eades for Needs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Eades for Needs – meeting real needs with purpose, clarity, and care." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #05030a;
+      --bg-alt: #0f0a1a;
+      --primary: #7c3aed;
+      --primary-soft: rgba(124, 58, 237, 0.12);
+      --accent: #a855f7;
+      --text: #f9fafb;
+      --muted: #9ca3af;
+      --card: #111827;
+      --border: #1f2933;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.75);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(to bottom, rgba(3, 7, 18, 0.95), rgba(3, 7, 18, 0.75), transparent);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 14px 20px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 14px;
+      background: conic-gradient(from 210deg, #a855f7, #6366f1, #22c55e, #a855f7);
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.35);
+    }
+
+    .brand-logo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 11px;
+      background: radial-gradient(circle at 20% 0, #1f2937 0, #020617 55%, #000 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #e5e7eb;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-tagline {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.86rem;
+      color: #e5e7eb;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.18s ease;
+      color: #cbd5f5;
+    }
+
+    .nav-links a:hover {
+      border-color: rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(129, 140, 248, 0.5);
+      background: radial-gradient(circle at 0 0, rgba(129, 140, 248, 0.35), rgba(15, 23, 42, 0.95));
+      color: #e5e7eb;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.45);
+    }
+
+    .nav-cta span {
+      font-size: 1rem;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .hero {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 40px 20px 32px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: radial-gradient(circle at 0 0, rgba(129, 140, 248, 0.35), rgba(15, 23, 42, 0.95));
+      color: #e5e7eb;
+      font-size: 0.75rem;
+      margin-bottom: 14px;
+    }
+
+    .hero-pill-badge {
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #c4b5fd;
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 4vw, 3.1rem);
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(120deg, #a855f7, #6366f1, #22c55e);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: #d1d5db;
+      max-width: 32rem;
+      margin-bottom: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-meta span::before {
+      content: "•";
+      color: #6366f1;
+      font-size: 1.1rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-primary {
+      padding: 10px 18px;
+      border-radius: var(--radius-pill);
+      border: none;
+      background: linear-gradient(135deg, #7c3aed, #4f46e5);
+      color: #f9fafb;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 18px 40px rgba(79, 70, 229, 0.6);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 22px 50px rgba(79, 70, 229, 0.75);
+    }
+
+    .btn-secondary {
+      padding: 9px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      font-size: 0.86rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: background 0.16s ease, border-color 0.16s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: rgba(148, 163, 184, 0.9);
+    }
+
+    .hero-footnote {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .hero-visual {
+      position: relative;
+      padding: 18px;
+    }
+
+    .hero-card {
+      border-radius: 26px;
+      background: radial-gradient(circle at 0 0, rgba(129, 140, 248, 0.35), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .hero-card-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .hero-card-pill {
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #c4b5fd;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-card-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .hero-card-mission-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+
+    .hero-card-mission {
+      font-size: 0.86rem;
+      color: #e5e7eb;
+      margin-bottom: 10px;
+    }
+
+    .hero-card-list {
+      list-style: none;
+      font-size: 0.78rem;
+      color: #cbd5f5;
+      display: grid;
+      gap: 4px;
+    }
+
+    .hero-card-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-card-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #a855f7, #22c55e);
+    }
+
+    .hero-card-metrics {
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 10px 10px 8px;
+      font-size: 0.75rem;
+      color: #e5e7eb;
+      display: grid;
+      gap: 6px;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .metric-label {
+      color: #9ca3af;
+    }
+
+    .metric-value {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .metric-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(22, 163, 74, 0.12);
+      color: #bbf7d0;
+      border: 1px solid rgba(34, 197, 94, 0.4);
+      font-size: 0.7rem;
+    }
+
+    .hero-card-glow {
+      position: absolute;
+      inset: auto -40% -40% auto;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.35), transparent 60%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 20px 40px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: #d1d5db;
+      max-width: 26rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.9), #020617);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 14px 14px 12px;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.85);
+    }
+
+    .card-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #a5b4fc;
+      margin-bottom: 4px;
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 0.86rem;
+      color: #d1d5db;
+      margin-bottom: 8px;
+    }
+
+    .card-list {
+      list-style: none;
+      font-size: 0.8rem;
+      color: #9ca3af;
+      display: grid;
+      gap: 4px;
+    }
+
+    .card-list li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-list li::before {
+      content: "▹";
+      color: #6366f1;
+      font-size: 0.9rem;
+    }
+
+    .contact {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 0 0, rgba(129, 140, 248, 0.35), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .contact-card h3 {
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .contact-card p {
+      font-size: 0.86rem;
+      color: #d1d5db;
+      margin-bottom: 10px;
+    }
+
+    .contact-meta {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      display: grid;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .contact-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .contact-meta span::before {
+      content: "◎";
+      color: #a855f7;
+      font-size: 0.9rem;
+    }
+
+    form {
+      display: grid;
+      gap: 10px;
+      font-size: 0.86rem;
+    }
+
+    label {
+      display: grid;
+      gap: 4px;
+    }
+
+    input,
+    textarea {
+      border-radius: 10px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.95);
+      color: #e5e7eb;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 0.86rem;
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #6366f1;
+      box-shadow: 0 0 0 1px rgba(79, 70, 229, 0.7);
+      background: rgba(15, 23, 42, 1);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-hint {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 14px 20px 18px;
+      font-size: 0.78rem;
+      color: #9ca3af;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner span strong {
+      color: #e5e7eb;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+    }
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding-top: 26px;
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .hero-card {
+        border-radius: 22px;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .contact {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero {
+        padding-top: 22px;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+      }
+      .hero-card-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-card-metrics {
+        order: -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <nav class="nav">
+        <div class="brand">
+          <div class="brand-logo">
+            <div class="brand-logo-inner">EN</div>
+          </div>
+          <div class="brand-text">
+            <div class="brand-name">Eades for Needs</div>
+            <div class="brand-tagline">Meeting real needs with purpose, clarity, and care.</div>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#mission">Mission</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+          <a href="#about">About</a>
+          <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Let’s talk
+            <span>↗</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div>
+          <div class="hero-pill">
+            <span class="hero-pill-badge">Purpose‑Built</span>
+            Launching from Fort Worth, TX · Built to scale with you
+          </div>
+          <h1 class="hero-title">
+            A modern home for <span>real‑world needs</span> and the people who solve them.
+          </h1>
+          <p class="hero-subtitle">
+            Eades for Needs is a flexible, mission‑driven brand—part personal hub, part service platform—designed to
+            showcase work that actually helps people: cleaner streets, stronger communities, and clearer opportunities.
+          </p>
+          <div class="hero-meta">
+            <span>Service‑driven projects and ventures</span>
+            <span>Built for trust, clarity, and follow‑through</span>
+            <span>Ready for clients, partners, and mentors</span>
+          </div>
+          <div class="hero-actions">
+            <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+              Start a conversation
+              <span>→</span>
+            </button>
+            <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+              Explore services & focus areas
+            </button>
+          </div>
+          <div class="hero-footnote">
+            Built to grow with every new venture—from local routes and recurring services to mentorship and community work.
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <div>
+                <div class="hero-card-title">Brand Snapshot</div>
+                <div style="font-size:0.78rem;color:#cbd5f5;">Eades for Needs · Fort Worth, TX</div>
+              </div>
+              <div class="hero-card-pill">Live Concept</div>
+            </div>
+            <div class="hero-card-body">
+              <div>
+                <div class="hero-card-mission-label">Mission</div>
+                <div class="hero-card-mission">
+                  Meet real needs with reliability, empathy, and operational excellence—starting locally, scaling
+                  intentionally.
+                </div>
+                <ul class="hero-card-list">
+                  <li>Route‑based, recurring services that actually make life easier</li>
+                  <li>Clean, professional presence that people can trust</li>
+                  <li>Room to grow into mentorship, youth work, and new ventures</li>
+                </ul>
+              </div>
+              <div class="hero-card-metrics">
+                <div class="metric-row">
+                  <span class="metric-label">Focus</span>
+                  <span class="metric-value">Service · Community · Clarity</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-label">Current lane</span>
+                  <span class="metric-value">Local services & brand foundation</span>
+                </div>
+                <div class="metric-row">
+                  <span class="metric-label">Trajectory</span>
+                  <span class="metric-pill">
+                    Growing
+                    <span style="font-size:0.9rem;">⬈</span>
+                  </span>
+                </div>
+                <div style="font-size:0.72rem;color:#9ca3af;">
+                  This site is intentionally simple: fast to launch, easy to adapt, and built to look like you take
+                  the work seriously.
+                </div>
+              </div>
+            </div>
+            <div class="hero-card-glow"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="mission">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Mission & positioning</div>
+          </div>
+          <p class="section-subtitle">
+            Eades for Needs exists to be a stable, trustworthy home for work that serves people—whether that’s a
+            trash‑can cleaning route, a mentorship program, or a new service you haven’t named yet.
+          </p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="card-label">Core idea</div>
+            <div class="card-title">Meet needs, not trends.</div>
+            <p class="card-body">
+              The brand is built around solving real problems in people’s everyday lives, not chasing hype. Clean
+              execution, clear communication, and consistent follow‑through are the differentiators.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-label">Brand promise</div>
+            <div class="card-title">Clarity, reliability, care.</div>
+            <p class="card-body">
+              Anyone who lands here should feel: “These people show up, do what they say, and make things better.”
+              That applies to customers, partners, and future mentors.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-label">Flexibility</div>
+            <div class="card-title">One home, many lanes.</div>
+            <p class="card-body">
+              This site can flex: a service brand, a personal hub, a community platform—or all three as your work
+              expands.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="services">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Current & future lanes</div>
+          </div>
+          <p class="section-subtitle">
+            Start with what’s real right now, then layer in new offerings as they launch. These are placeholders you
+            can edit as your routes, projects, and programs grow.
+          </p>
+        </div>
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="card-label">Service lane</div>
+            <div class="card-title">Local, route‑based services</div>
+            <p class="card-body">
+              Think: trash‑can cleaning, exterior refresh, or other recurring services that keep neighborhoods clean
+              and cared for.
+            </p>
+            <ul class="card-list">
+              <li>Route‑based scheduling for efficiency</li>
+              <li>Recurring plans for predictable revenue</li>
+              <li>Professional, on‑time communication</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-label">Personal lane</div>
+            <div class="card-title">Portfolio & leadership hub</div>
+            <p class="card-body">
+              Use this space to show mentors, professors, and partners what you’re building and how you think.
+            </p>
+            <ul class="card-list">
+              <li>Highlight ventures, roles, and impact</li>
+              <li>Share your operating principles and values</li>
+              <li>Link to resumes, talks, or case studies</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-label">Community lane</div>
+            <div class="card-title">Mentorship & youth work</div>
+            <p class="card-body">
+              As your capacity grows, this brand can host resources, programs, or stories that support younger
+              students and campers.
+            </p>
+            <ul class="card-list">
+              <li>Simple resource pages and guides</li>
+              <li>Stories that show real growth and care</li>
+              <li>Sign‑up forms for future programs</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="section-header">
+          <div>
+            <div class="section-title">About the builder</div>
+          </div>
+          <p class="section-subtitle">
+            Behind Eades for Needs is a builder who cares about doing things the right way: disciplined routes,
+            thoughtful systems, and a real commitment to the people being served.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-label">Operating philosophy</div>
+          <div class="card-title">Presence, discipline, and follow‑through.</div>
+          <p class="card-body">
+            This brand is a reflection of how the work gets done: show up prepared, listen carefully, execute with
+            detail, and leave things better than you found them. It’s built to earn trust over time, not overnight.
+          </p>
+          <ul class="card-list">
+            <li>Empathy and presence with the people you serve</li>
+            <li>Systems that make reliability the default, not the exception</li>
+            <li>Room to experiment, learn, and iterate without losing professionalism</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="section-header">
+          <div>
+            <div class="section-title">Contact & next steps</div>
+          </div>
+          <p class="section-subtitle">
+            Whether you’re a neighbor, a potential customer, a mentor, or a future collaborator—this is where the
+            conversation starts.
+          </p>
+        </div>
+        <div class="contact">
+          <div class="contact-card">
+            <h3>Start a conversation</h3>
+            <p>
+              Share what you’re thinking—service needs, collaboration ideas, or mentorship opportunities. This form
+              is intentionally simple so it never gets in the way of a good connection.
+            </p>
+            <div class="contact-meta">
+              <span>Based in Fort Worth, TX</span>
+              <span>Available for local services and remote collaboration</span>
+            </div>
+            <div style="font-size:0.78rem;color:#cbd5f5;margin-bottom:6px;">
+              You can wire this form to any email service (Formspree, Getform, etc.) when you’re ready. For now, it
+             ’s a clean front‑end that shows you’re serious.
+            </div>
+          </div>
+          <div class="card">
+            <form>
+              <label>
+                Name
+                <input type="text" name="name" placeholder="Your name" />
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" placeholder="you@example.com" />
+              </label>
+              <label>
+                What are you reaching out about?
+                <textarea name="message" placeholder="Tell me about your needs, idea, or opportunity."></textarea>
+              </label>
+              <div class="form-hint">
+                This form doesn’t send anywhere yet—add an action URL when you connect a form service.
+              </div>
+              <button type="button" class="btn-primary" style="margin-top:4px;">
+                Looks great for now
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <span>
+          <strong>Eades for Needs</strong> · Built as a living hub for service, leadership, and real‑world work.
+        </span>
+        <div class="footer-links">
+          <a href="#top">Back to top</a>
+          <a href="#mission">Mission</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
